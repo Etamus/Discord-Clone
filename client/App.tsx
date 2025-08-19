@@ -15,7 +15,7 @@ const queryClient = new QueryClient();
 const App = () => {
   useEffect(() => {
     // Set dark mode by default for Discord-like theme
-    document.documentElement.classList.add('dark');
+    document.documentElement.classList.add("dark");
   }, []);
 
   return (

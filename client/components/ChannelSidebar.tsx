@@ -1,8 +1,19 @@
-import { Search, UserPlus, Settings, Mic, Headphones, MoreHorizontal } from "lucide-react";
+import {
+  Search,
+  UserPlus,
+  Settings,
+  Mic,
+  Headphones,
+  MoreHorizontal,
+} from "lucide-react";
 
 const friends = [
   { name: "Higher", status: "Há algumas horas", isOnline: true },
-  { name: "Smith", status: "Jogando um jogo engraçado onde você sempre tem que descobrir", isOnline: true },
+  {
+    name: "Smith",
+    status: "Jogando um jogo engraçado onde você sempre tem que descobrir",
+    isOnline: true,
+  },
   { name: "Via", status: "Invisível", isOnline: false },
   { name: "Via", status: "Invisible", isOnline: false },
   { name: "24-3-RGB", status: "Saiu há 6 horas", isOnline: false },
@@ -19,7 +30,10 @@ export function ChannelSidebar() {
       {/* Search */}
       <div className="p-4">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-discord-text-muted" size={16} />
+          <Search
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-discord-text-muted"
+            size={16}
+          />
           <input
             type="text"
             placeholder="Buscar"
@@ -54,8 +68,12 @@ export function ChannelSidebar() {
               />
             </div>
             <div className="ml-3 flex-1 min-w-0">
-              <div className="text-discord-text-primary text-sm font-medium">{friend.name}</div>
-              <div className="text-discord-text-muted text-xs truncate">{friend.status}</div>
+              <div className="text-discord-text-primary text-sm font-medium">
+                {friend.name}
+              </div>
+              <div className="text-discord-text-muted text-xs truncate">
+                {friend.status}
+              </div>
             </div>
             <MoreHorizontal
               className="opacity-0 group-hover:opacity-100 text-discord-text-muted hover:text-discord-text-primary"
@@ -75,7 +93,9 @@ export function ChannelSidebar() {
             <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-discord-green rounded-full border-2 border-discord-darkest" />
           </div>
           <div className="ml-2 flex-1 min-w-0">
-            <div className="text-discord-text-primary text-sm font-medium">Oívio</div>
+            <div className="text-discord-text-primary text-sm font-medium">
+              Oívio
+            </div>
             <div className="text-discord-text-muted text-xs">#0</div>
           </div>
         </div>
