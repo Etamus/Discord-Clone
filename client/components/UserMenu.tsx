@@ -17,13 +17,13 @@ const statusOptions = [
   { id: "invisible", label: "Invisível", color: "bg-discord-text-muted" },
 ];
 
-export function UserMenu({ 
-  isOpen, 
-  onClose, 
-  onEditProfile, 
-  onChangeStatus, 
+export function UserMenu({
+  isOpen,
+  onClose,
+  onEditProfile,
+  onChangeStatus,
   onSwitchAccount,
-  currentStatus 
+  currentStatus,
 }: UserMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -47,7 +47,10 @@ export function UserMenu({
 
   return (
     <div className="fixed inset-0 z-50">
-      <div ref={menuRef} className="absolute bottom-16 left-4 w-72 bg-discord-darkest rounded-lg shadow-lg border border-discord-hover overflow-hidden">
+      <div
+        ref={menuRef}
+        className="absolute bottom-16 left-4 w-72 bg-discord-darkest rounded-lg shadow-lg border border-discord-hover overflow-hidden"
+      >
         {/* Status Message */}
         <div className="p-4 border-b border-discord-hover">
           <div className="flex items-center mb-3">
@@ -55,24 +58,31 @@ export function UserMenu({
               <div className="w-12 h-12 bg-discord-blurple rounded-full flex items-center justify-center text-white font-bold text-lg">
                 C
               </div>
-              <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-discord-darkest ${
-                statusOptions.find(s => s.id === currentStatus)?.color || "bg-discord-green"
-              }`} />
+              <div
+                className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-discord-darkest ${
+                  statusOptions.find((s) => s.id === currentStatus)?.color ||
+                  "bg-discord-green"
+                }`}
+              />
             </div>
             <div className="ml-3 flex-1">
               <div className="text-white font-semibold">Chico</div>
-              <div className="text-discord-text-muted text-sm">etamus • Chiquinho</div>
+              <div className="text-discord-text-muted text-sm">
+                etamus • Chiquinho
+              </div>
               <div className="flex items-center mt-1">
                 <div className="w-3 h-3 bg-blue-500 rounded-full mr-1"></div>
                 <span className="text-xs text-discord-text-muted">CODE</span>
               </div>
             </div>
           </div>
-          
+
           <div className="bg-discord-hover rounded p-3">
             <div className="flex items-center text-discord-text-muted text-sm">
               <Edit size={14} className="mr-2" />
-              <span className="italic">Escolha uma criatura mítica como um animal de estimação</span>
+              <span className="italic">
+                Escolha uma criatura mítica como um animal de estimação
+              </span>
             </div>
           </div>
         </div>
@@ -92,7 +102,9 @@ export function UserMenu({
 
           {/* Status Options */}
           <div className="px-4 py-2">
-            <div className="text-discord-text-muted text-xs font-semibold mb-2">STATUS</div>
+            <div className="text-discord-text-muted text-xs font-semibold mb-2">
+              STATUS
+            </div>
             {statusOptions.map((status) => (
               <button
                 key={status.id}
@@ -101,14 +113,16 @@ export function UserMenu({
                   onClose();
                 }}
                 className={`w-full flex items-center px-2 py-1.5 rounded text-sm transition-colors ${
-                  currentStatus === status.id 
-                    ? "bg-discord-hover text-white" 
+                  currentStatus === status.id
+                    ? "bg-discord-hover text-white"
                     : "text-discord-text-primary hover:bg-discord-hover"
                 }`}
               >
                 <div className={`w-3 h-3 rounded-full mr-3 ${status.color}`} />
                 {status.label}
-                {currentStatus === status.id && <div className="ml-auto w-1 h-1 bg-white rounded-full" />}
+                {currentStatus === status.id && (
+                  <div className="ml-auto w-1 h-1 bg-white rounded-full" />
+                )}
               </button>
             ))}
           </div>

@@ -22,7 +22,7 @@ const iconMap = {
 
 const colorMap = {
   success: "border-discord-green bg-discord-green/10",
-  error: "border-discord-red bg-discord-red/10", 
+  error: "border-discord-red bg-discord-red/10",
   info: "border-discord-blurple bg-discord-blurple/10",
 };
 
@@ -41,18 +41,30 @@ function Toast({ toast, onRemove }: ToastProps) {
   }, [toast.id, toast.duration, onRemove]);
 
   return (
-    <div className={`transform transition-all duration-300 ${
-      isVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-    }`}>
-      <div className={`bg-discord-darkest border rounded-lg p-4 shadow-lg min-w-80 ${colorMap[toast.type]}`}>
+    <div
+      className={`transform transition-all duration-300 ${
+        isVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+      }`}
+    >
+      <div
+        className={`bg-discord-darkest border rounded-lg p-4 shadow-lg min-w-80 ${colorMap[toast.type]}`}
+      >
         <div className="flex items-start">
-          <Icon className={`mt-0.5 mr-3 flex-shrink-0 ${
-            toast.type === "success" ? "text-discord-green" :
-            toast.type === "error" ? "text-discord-red" : "text-discord-blurple"
-          }`} size={20} />
+          <Icon
+            className={`mt-0.5 mr-3 flex-shrink-0 ${
+              toast.type === "success"
+                ? "text-discord-green"
+                : toast.type === "error"
+                  ? "text-discord-red"
+                  : "text-discord-blurple"
+            }`}
+            size={20}
+          />
           <div className="flex-1 min-w-0">
             <div className="text-white font-medium text-sm">{toast.title}</div>
-            <div className="text-discord-text-muted text-sm mt-1">{toast.message}</div>
+            <div className="text-discord-text-muted text-sm mt-1">
+              {toast.message}
+            </div>
           </div>
           <button
             onClick={() => onRemove(toast.id)}
@@ -87,11 +99,11 @@ export function useToast() {
 
   const addToast = (toast: Omit<ToastMessage, "id">) => {
     const id = Date.now().toString();
-    setToasts(prev => [...prev, { ...toast, id }]);
+    setToasts((prev) => [...prev, { ...toast, id }]);
   };
 
   const removeToast = (id: string) => {
-    setToasts(prev => prev.filter(toast => toast.id !== id));
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
 
   return { toasts, addToast, removeToast };

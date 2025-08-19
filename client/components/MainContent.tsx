@@ -2,7 +2,11 @@ import { useState } from "react";
 import { MessageSquare, Phone, Video, UserPlus, Search } from "lucide-react";
 
 interface MainContentProps {
-  onShowToast: (toast: { type: "success" | "error" | "info"; title: string; message: string }) => void;
+  onShowToast: (toast: {
+    type: "success" | "error" | "info";
+    title: string;
+    message: string;
+  }) => void;
 }
 
 const tabs = ["Online", "Todos", "Pendente", "Bloqueado"];
@@ -16,7 +20,7 @@ export function MainContent({ onShowToast }: MainContentProps) {
     onShowToast({
       type: "info",
       title: `Aba alterada`,
-      message: `Visualizando amigos: ${tab}`
+      message: `Visualizando amigos: ${tab}`,
     });
   };
 
@@ -24,7 +28,7 @@ export function MainContent({ onShowToast }: MainContentProps) {
     onShowToast({
       type: "success",
       title: "Iniciando chamada",
-      message: "Conectando chamada de voz..."
+      message: "Conectando chamada de voz...",
     });
   };
 
@@ -32,7 +36,7 @@ export function MainContent({ onShowToast }: MainContentProps) {
     onShowToast({
       type: "success",
       title: "Iniciando videochamada",
-      message: "Conectando chamada de vídeo..."
+      message: "Conectando chamada de vídeo...",
     });
   };
 
@@ -40,16 +44,14 @@ export function MainContent({ onShowToast }: MainContentProps) {
     onShowToast({
       type: "info",
       title: "Adicionar amigo",
-      message: "Abrindo formulário para adicionar novo amigo"
+      message: "Abrindo formulário para adicionar novo amigo",
     });
   };
 
-  const friends = [
-    { name: "Teste", status: "Há algumas horas", avatar: "T" },
-  ];
+  const friends = [{ name: "Teste", status: "Há algumas horas", avatar: "T" }];
 
-  const filteredFriends = friends.filter(friend =>
-    friend.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredFriends = friends.filter((friend) =>
+    friend.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
   return (
     <div className="flex-1 bg-discord-dark flex flex-col">
@@ -133,45 +135,49 @@ export function MainContent({ onShowToast }: MainContentProps) {
           {filteredFriends.length === 0 ? (
             <div className="text-center py-8">
               <div className="text-discord-text-secondary mb-2">
-                {searchTerm ? "Nenhum amigo encontrado" : `Nenhum amigo ${activeTab.toLowerCase()}`}
+                {searchTerm
+                  ? "Nenhum amigo encontrado"
+                  : `Nenhum amigo ${activeTab.toLowerCase()}`}
               </div>
               <div className="text-discord-text-muted text-sm">
-                {searchTerm ? "Tente buscar com outros termos" : "Que tal adicionar alguns amigos?"}
+                {searchTerm
+                  ? "Tente buscar com outros termos"
+                  : "Que tal adicionar alguns amigos?"}
               </div>
             </div>
           ) : (
             <div className="space-y-1">
               {filteredFriends.map((friend, index) => (
-              <div
-                key={index}
-                className="flex items-center p-2 rounded hover:bg-discord-hover cursor-pointer group"
-              >
-                <div className="relative mr-3">
-                  <div className="w-8 h-8 bg-discord-blurple rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                    {friend.avatar}
+                <div
+                  key={index}
+                  className="flex items-center p-2 rounded hover:bg-discord-hover cursor-pointer group"
+                >
+                  <div className="relative mr-3">
+                    <div className="w-8 h-8 bg-discord-blurple rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                      {friend.avatar}
+                    </div>
+                    <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-discord-green rounded-full border-2 border-discord-dark" />
                   </div>
-                  <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-discord-green rounded-full border-2 border-discord-dark" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-discord-text-primary font-medium">
-                    {friend.name}
+                  <div className="flex-1 min-w-0">
+                    <div className="text-discord-text-primary font-medium">
+                      {friend.name}
+                    </div>
+                    <div className="text-discord-text-muted text-sm truncate">
+                      {friend.status}
+                    </div>
                   </div>
-                  <div className="text-discord-text-muted text-sm truncate">
-                    {friend.status}
+                  <div className="flex space-x-2 opacity-0 group-hover:opacity-100">
+                    <button className="p-2 bg-discord-darkest rounded-full hover:bg-discord-hover text-discord-text-muted hover:text-white">
+                      <MessageSquare size={16} />
+                    </button>
+                    <button className="p-2 bg-discord-darkest rounded-full hover:bg-discord-hover text-discord-text-muted hover:text-white">
+                      <Phone size={16} />
+                    </button>
+                    <button className="p-2 bg-discord-darkest rounded-full hover:bg-discord-hover text-discord-text-muted hover:text-white">
+                      <Video size={16} />
+                    </button>
                   </div>
                 </div>
-                <div className="flex space-x-2 opacity-0 group-hover:opacity-100">
-                  <button className="p-2 bg-discord-darkest rounded-full hover:bg-discord-hover text-discord-text-muted hover:text-white">
-                    <MessageSquare size={16} />
-                  </button>
-                  <button className="p-2 bg-discord-darkest rounded-full hover:bg-discord-hover text-discord-text-muted hover:text-white">
-                    <Phone size={16} />
-                  </button>
-                  <button className="p-2 bg-discord-darkest rounded-full hover:bg-discord-hover text-discord-text-muted hover:text-white">
-                    <Video size={16} />
-                  </button>
-                </div>
-              </div>
               ))}
             </div>
           )}

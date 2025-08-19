@@ -24,19 +24,14 @@ export default function Index() {
         onOpenSettings={handleOpenSettings}
         onShowToast={addToast}
       />
-      <MainContent
-        onShowToast={addToast}
-      />
+      <MainContent onShowToast={addToast} />
 
       <UserSettingsModal
         isOpen={isSettingsOpen}
         onClose={handleCloseSettings}
       />
 
-      <ToastContainer
-        toasts={toasts}
-        onRemove={removeToast}
-      />
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
     </div>
   );
 }

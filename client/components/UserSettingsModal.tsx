@@ -7,35 +7,44 @@ interface UserSettingsModalProps {
 }
 
 const settingsMenuItems = [
-  { category: "CONFIGURAÇÕES DE USUÁRIO", items: [
-    "Minha conta",
-    "Perfis", 
-    "Conteúdo e social",
-    "Dados e privacidade",
-    "Central da Família",
-    "Aplicativos autorizados",
-    "Dispositivos",
-    "Conexões",
-    "Clipes"
-  ]},
-  { category: "CONFIGURAÇÕES DE COBRANÇA", items: [
-    "Nitro",
-    "Impulso de servidor",
-    "Assinaturas",
-    "Inventário de presentes",
-    "Cobrança"
-  ]},
-  { category: "CONFIG. DO APLICATIVO", items: [
-    "Aparência",
-    "Acessibilidade", 
-    "Voz e vídeo",
-    "Bate-papo",
-    "Notificações",
-    "Atalhos do teclado",
-    "Idioma",
-    "Modo streamer",
-    "Avançado"
-  ]}
+  {
+    category: "CONFIGURAÇÕES DE USUÁRIO",
+    items: [
+      "Minha conta",
+      "Perfis",
+      "Conteúdo e social",
+      "Dados e privacidade",
+      "Central da Família",
+      "Aplicativos autorizados",
+      "Dispositivos",
+      "Conexões",
+      "Clipes",
+    ],
+  },
+  {
+    category: "CONFIGURAÇÕES DE COBRANÇA",
+    items: [
+      "Nitro",
+      "Impulso de servidor",
+      "Assinaturas",
+      "Inventário de presentes",
+      "Cobrança",
+    ],
+  },
+  {
+    category: "CONFIG. DO APLICATIVO",
+    items: [
+      "Aparência",
+      "Acessibilidade",
+      "Voz e vídeo",
+      "Bate-papo",
+      "Notificações",
+      "Atalhos do teclado",
+      "Idioma",
+      "Modo streamer",
+      "Avançado",
+    ],
+  },
 ];
 
 export function UserSettingsModal({ isOpen, onClose }: UserSettingsModalProps) {
@@ -51,7 +60,10 @@ export function UserSettingsModal({ isOpen, onClose }: UserSettingsModalProps) {
         <div className="w-72 bg-discord-sidebar p-4 overflow-y-auto">
           <div className="mb-4">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-discord-text-muted" size={16} />
+              <Search
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-discord-text-muted"
+                size={16}
+              />
               <input
                 type="text"
                 placeholder="Buscar"
@@ -68,23 +80,25 @@ export function UserSettingsModal({ isOpen, onClose }: UserSettingsModalProps) {
                 {section.category}
               </h3>
               {section.items
-                .filter(item => item.toLowerCase().includes(searchTerm.toLowerCase()))
+                .filter((item) =>
+                  item.toLowerCase().includes(searchTerm.toLowerCase()),
+                )
                 .map((item) => (
-                <button
-                  key={item}
-                  onClick={() => setSelectedItem(item)}
-                  className={`w-full text-left px-3 py-2 rounded text-sm mb-1 transition-colors ${
-                    selectedItem === item
-                      ? "bg-discord-hover text-white"
-                      : "text-discord-text-secondary hover:bg-discord-hover hover:text-discord-text-primary"
-                  }`}
-                >
-                  {item}
-                  {item === "Nitro" && (
-                    <span className="ml-2 w-2 h-2 bg-purple-500 rounded-full inline-block"></span>
-                  )}
-                </button>
-              ))}
+                  <button
+                    key={item}
+                    onClick={() => setSelectedItem(item)}
+                    className={`w-full text-left px-3 py-2 rounded text-sm mb-1 transition-colors ${
+                      selectedItem === item
+                        ? "bg-discord-hover text-white"
+                        : "text-discord-text-secondary hover:bg-discord-hover hover:text-discord-text-primary"
+                    }`}
+                  >
+                    {item}
+                    {item === "Nitro" && (
+                      <span className="ml-2 w-2 h-2 bg-purple-500 rounded-full inline-block"></span>
+                    )}
+                  </button>
+                ))}
             </div>
           ))}
         </div>
@@ -92,7 +106,9 @@ export function UserSettingsModal({ isOpen, onClose }: UserSettingsModalProps) {
         {/* Main Content */}
         <div className="flex-1 p-6 overflow-y-auto">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-white text-2xl font-semibold">{selectedItem}</h1>
+            <h1 className="text-white text-2xl font-semibold">
+              {selectedItem}
+            </h1>
             <button
               onClick={onClose}
               className="text-discord-text-muted hover:text-white p-2 rounded transition-colors"
@@ -120,7 +136,9 @@ export function UserSettingsModal({ isOpen, onClose }: UserSettingsModalProps) {
                       C
                     </div>
                     <div>
-                      <h2 className="text-white text-xl font-semibold">Chico</h2>
+                      <h2 className="text-white text-xl font-semibold">
+                        Chico
+                      </h2>
                       <div className="flex space-x-2 mt-2">
                         <div className="w-6 h-6 bg-red-500 rounded-full"></div>
                         <div className="w-6 h-6 bg-green-500 rounded-full"></div>
@@ -137,8 +155,12 @@ export function UserSettingsModal({ isOpen, onClose }: UserSettingsModalProps) {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <div>
-                      <div className="text-discord-text-primary font-medium">Nome Exibido</div>
-                      <div className="text-discord-text-muted text-sm">Chico</div>
+                      <div className="text-discord-text-primary font-medium">
+                        Nome Exibido
+                      </div>
+                      <div className="text-discord-text-muted text-sm">
+                        Chico
+                      </div>
                     </div>
                     <button className="text-discord-text-muted hover:text-white text-sm">
                       Editar
@@ -147,8 +169,12 @@ export function UserSettingsModal({ isOpen, onClose }: UserSettingsModalProps) {
 
                   <div className="flex justify-between items-center">
                     <div>
-                      <div className="text-discord-text-primary font-medium">Nome De Usuário</div>
-                      <div className="text-discord-text-muted text-sm">etamus</div>
+                      <div className="text-discord-text-primary font-medium">
+                        Nome De Usuário
+                      </div>
+                      <div className="text-discord-text-muted text-sm">
+                        etamus
+                      </div>
                     </div>
                     <button className="text-discord-text-muted hover:text-white text-sm">
                       Editar
@@ -157,8 +183,12 @@ export function UserSettingsModal({ isOpen, onClose }: UserSettingsModalProps) {
 
                   <div className="flex justify-between items-center">
                     <div>
-                      <div className="text-discord-text-primary font-medium">E-Mail</div>
-                      <div className="text-discord-text-muted text-sm">••••••••••••@gmail.com</div>
+                      <div className="text-discord-text-primary font-medium">
+                        E-Mail
+                      </div>
+                      <div className="text-discord-text-muted text-sm">
+                        ••••••••••••@gmail.com
+                      </div>
                     </div>
                     <button className="text-discord-text-muted hover:text-white text-sm">
                       Editar
@@ -167,8 +197,12 @@ export function UserSettingsModal({ isOpen, onClose }: UserSettingsModalProps) {
 
                   <div className="flex justify-between items-center">
                     <div>
-                      <div className="text-discord-text-primary font-medium">Telefone</div>
-                      <div className="text-discord-text-muted text-sm">••••••••••2526</div>
+                      <div className="text-discord-text-primary font-medium">
+                        Telefone
+                      </div>
+                      <div className="text-discord-text-muted text-sm">
+                        ••••••••••2526
+                      </div>
                     </div>
                     <div className="space-x-2">
                       <button className="text-discord-text-muted hover:text-white text-sm">
@@ -183,15 +217,21 @@ export function UserSettingsModal({ isOpen, onClose }: UserSettingsModalProps) {
               </div>
 
               <div className="mt-6">
-                <h3 className="text-white text-lg font-semibold mb-4">Senha e autenticação</h3>
+                <h3 className="text-white text-lg font-semibold mb-4">
+                  Senha e autenticação
+                </h3>
                 <button className="bg-discord-blurple text-white px-4 py-2 rounded text-sm font-medium hover:bg-discord-blurple/90">
                   Mudar senha
                 </button>
-                
+
                 <div className="mt-6 bg-discord-darkest rounded-lg p-4">
-                  <h4 className="text-white font-medium mb-2">Aplicativo De Autenticação</h4>
+                  <h4 className="text-white font-medium mb-2">
+                    Aplicativo De Autenticação
+                  </h4>
                   <p className="text-discord-text-muted text-sm mb-4">
-                    Proteja sua conta do Discord com uma camada extra de segurança. Uma vez configurado, será necessário inserir sua senha e completar uma etapa adicional para poder entrar.
+                    Proteja sua conta do Discord com uma camada extra de
+                    segurança. Uma vez configurado, será necessário inserir sua
+                    senha e completar uma etapa adicional para poder entrar.
                   </p>
                   <div className="w-full bg-discord-blurple h-1 rounded"></div>
                 </div>

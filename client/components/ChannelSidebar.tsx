@@ -10,16 +10,21 @@ import {
 } from "lucide-react";
 import { UserMenu } from "./UserMenu";
 
-const friends = [
-  { name: "Teste", status: "Há algumas horas", isOnline: true },
-];
+const friends = [{ name: "Teste", status: "Há algumas horas", isOnline: true }];
 
 interface ChannelSidebarProps {
   onOpenSettings: () => void;
-  onShowToast: (toast: { type: "success" | "error" | "info"; title: string; message: string }) => void;
+  onShowToast: (toast: {
+    type: "success" | "error" | "info";
+    title: string;
+    message: string;
+  }) => void;
 }
 
-export function ChannelSidebar({ onOpenSettings, onShowToast }: ChannelSidebarProps) {
+export function ChannelSidebar({
+  onOpenSettings,
+  onShowToast,
+}: ChannelSidebarProps) {
   const [isMicMuted, setIsMicMuted] = useState(false);
   const [isDeafened, setIsDeafened] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -31,7 +36,9 @@ export function ChannelSidebar({ onOpenSettings, onShowToast }: ChannelSidebarPr
     onShowToast({
       type: "info",
       title: isMicMuted ? "Microfone ativado" : "Microfone desativado",
-      message: isMicMuted ? "Você pode falar novamente" : "Outros não conseguem te ouvir"
+      message: isMicMuted
+        ? "Você pode falar novamente"
+        : "Outros não conseguem te ouvir",
     });
   };
 
@@ -42,8 +49,10 @@ export function ChannelSidebar({ onOpenSettings, onShowToast }: ChannelSidebarPr
     }
     onShowToast({
       type: "info",
-      title: isDeafened ? "Som ativado" : "Som desativado", 
-      message: isDeafened ? "Você pode ouvir novamente" : "Você não consegue ouvir nada"
+      title: isDeafened ? "Som ativado" : "Som desativado",
+      message: isDeafened
+        ? "Você pode ouvir novamente"
+        : "Você não consegue ouvir nada",
     });
   };
 
@@ -51,14 +60,14 @@ export function ChannelSidebar({ onOpenSettings, onShowToast }: ChannelSidebarPr
     setUserStatus(status);
     const statusLabels: Record<string, string> = {
       online: "Online",
-      away: "Ausente", 
+      away: "Ausente",
       busy: "Ocupado",
-      invisible: "Invisível"
+      invisible: "Invisível",
     };
     onShowToast({
       type: "success",
       title: "Status alterado",
-      message: `Seu status foi alterado para ${statusLabels[status]}`
+      message: `Seu status foi alterado para ${statusLabels[status]}`,
     });
   };
 
@@ -66,7 +75,7 @@ export function ChannelSidebar({ onOpenSettings, onShowToast }: ChannelSidebarPr
     onShowToast({
       type: "info",
       title: "Editar perfil",
-      message: "Funcionalidade de edição de perfil em desenvolvimento"
+      message: "Funcionalidade de edição de perfil em desenvolvimento",
     });
   };
 
@@ -74,12 +83,12 @@ export function ChannelSidebar({ onOpenSettings, onShowToast }: ChannelSidebarPr
     onShowToast({
       type: "info",
       title: "Trocar conta",
-      message: "Funcionalidade de trocar conta em desenvolvimento"
+      message: "Funcionalidade de trocar conta em desenvolvimento",
     });
   };
 
-  const filteredFriends = friends.filter(friend => 
-    friend.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredFriends = friends.filter((friend) =>
+    friend.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -110,7 +119,9 @@ export function ChannelSidebar({ onOpenSettings, onShowToast }: ChannelSidebarPr
       <div className="px-4 mb-4">
         <div className="flex items-center space-x-2 text-discord-text-secondary text-sm">
           <UserPlus size={16} />
-          <span>Online - {filteredFriends.filter(f => f.isOnline).length}</span>
+          <span>
+            Online - {filteredFriends.filter((f) => f.isOnline).length}
+          </span>
         </div>
       </div>
 
@@ -149,7 +160,7 @@ export function ChannelSidebar({ onOpenSettings, onShowToast }: ChannelSidebarPr
 
       {/* Bottom User Panel */}
       <div className="h-14 bg-discord-darkest flex items-center px-2 relative">
-        <button 
+        <button
           onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
           className="flex items-center flex-1 hover:bg-discord-hover rounded p-1 transition-colors"
         >
@@ -157,11 +168,17 @@ export function ChannelSidebar({ onOpenSettings, onShowToast }: ChannelSidebarPr
             <div className="w-8 h-8 bg-discord-blurple rounded-full flex items-center justify-center text-white font-semibold text-sm">
               E
             </div>
-            <div className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-discord-darkest ${
-              userStatus === "online" ? "bg-discord-green" :
-              userStatus === "away" ? "bg-yellow-500" :
-              userStatus === "busy" ? "bg-red-500" : "bg-discord-text-muted"
-            }`} />
+            <div
+              className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-discord-darkest ${
+                userStatus === "online"
+                  ? "bg-discord-green"
+                  : userStatus === "away"
+                    ? "bg-yellow-500"
+                    : userStatus === "busy"
+                      ? "bg-red-500"
+                      : "bg-discord-text-muted"
+              }`}
+            />
           </div>
           <div className="ml-2 flex-1 min-w-0">
             <div className="text-discord-text-primary text-sm font-medium">
@@ -171,29 +188,29 @@ export function ChannelSidebar({ onOpenSettings, onShowToast }: ChannelSidebarPr
           </div>
         </button>
         <div className="flex items-center space-x-2">
-          <button 
+          <button
             onClick={handleMicToggle}
             className={`p-1 rounded transition-colors ${
-              isMicMuted 
-                ? "text-discord-red hover:text-discord-red/80 bg-discord-red/20" 
+              isMicMuted
+                ? "text-discord-red hover:text-discord-red/80 bg-discord-red/20"
                 : "text-discord-text-muted hover:text-discord-text-primary"
             }`}
             title={isMicMuted ? "Ativar microfone" : "Desativar microfone"}
           >
             {isMicMuted ? <MicOff size={18} /> : <Mic size={18} />}
           </button>
-          <button 
+          <button
             onClick={handleHeadphonesToggle}
             className={`p-1 rounded transition-colors ${
-              isDeafened 
-                ? "text-discord-red hover:text-discord-red/80 bg-discord-red/20" 
+              isDeafened
+                ? "text-discord-red hover:text-discord-red/80 bg-discord-red/20"
                 : "text-discord-text-muted hover:text-discord-text-primary"
             }`}
             title={isDeafened ? "Ativar som" : "Desativar som"}
           >
             <Headphones size={18} />
           </button>
-          <button 
+          <button
             onClick={onOpenSettings}
             className="p-1 text-discord-text-muted hover:text-discord-text-primary rounded transition-colors"
             title="Configurações do usuário"
@@ -201,7 +218,7 @@ export function ChannelSidebar({ onOpenSettings, onShowToast }: ChannelSidebarPr
             <Settings size={18} />
           </button>
         </div>
-        
+
         <UserMenu
           isOpen={isUserMenuOpen}
           onClose={() => setIsUserMenuOpen(false)}
