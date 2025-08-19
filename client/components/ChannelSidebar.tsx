@@ -8,15 +8,7 @@ import {
 } from "lucide-react";
 
 const friends = [
-  { name: "Higher", status: "Há algumas horas", isOnline: true },
-  {
-    name: "Smith",
-    status: "Jogando um jogo engraçado onde você sempre tem que descobrir",
-    isOnline: true,
-  },
-  { name: "Via", status: "Invisível", isOnline: false },
-  { name: "Via", status: "Invisible", isOnline: false },
-  { name: "24-3-RGB", status: "Saiu há 6 horas", isOnline: false },
+  { name: "Teste", status: "Há algumas horas", isOnline: true },
 ];
 
 export function ChannelSidebar() {
@@ -46,7 +38,7 @@ export function ChannelSidebar() {
       <div className="px-4 mb-4">
         <div className="flex items-center space-x-2 text-discord-text-secondary text-sm">
           <UserPlus size={16} />
-          <span>Online - 5</span>
+          <span>Online - 1</span>
         </div>
       </div>
 
@@ -88,13 +80,13 @@ export function ChannelSidebar() {
         <div className="flex items-center flex-1">
           <div className="relative">
             <div className="w-8 h-8 bg-discord-blurple rounded-full flex items-center justify-center text-white font-semibold text-sm">
-              O
+              E
             </div>
             <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-discord-green rounded-full border-2 border-discord-darkest" />
           </div>
           <div className="ml-2 flex-1 min-w-0">
             <div className="text-discord-text-primary text-sm font-medium">
-              Oívio
+              Etamus
             </div>
             <div className="text-discord-text-muted text-xs">#0</div>
           </div>
