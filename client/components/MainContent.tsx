@@ -59,21 +59,12 @@ export function MainContent() {
         {/* Friends List */}
         <div className="flex-1 p-4">
           <h2 className="text-discord-text-primary text-lg font-semibold mb-4">
-            ONLINE - 5
+            ONLINE - 1
           </h2>
 
           <div className="space-y-1">
             {[
-              { name: "Higher", status: "Há algumas horas", avatar: "H" },
-              {
-                name: "Smith",
-                status:
-                  "Jogando um jogo engraçado onde você sempre tem que descobrir",
-                avatar: "S",
-              },
-              { name: "Via", status: "Invisível", avatar: "V" },
-              { name: "Via", status: "Invisible", avatar: "V" },
-              { name: "24-3-RGB", status: "Saiu há 6 horas", avatar: "2" },
+              { name: "Teste", status: "Há algumas horas", avatar: "T" },
             ].map((friend, index) => (
               <div
                 key={index}
@@ -116,7 +107,7 @@ export function MainContent() {
           </h3>
           <div className="text-center mt-16">
             <div className="text-discord-text-secondary text-sm mb-2">
-              Por enquanto, est�� quieto...
+              Por enquanto, esta quieto...
             </div>
             <div className="text-discord-text-muted text-xs leading-relaxed">
               Quando um amigo iniciar uma atividade — como jogar um jogo ou
