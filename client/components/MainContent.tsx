@@ -1,6 +1,56 @@
+import { useState } from "react";
 import { MessageSquare, Phone, Video, UserPlus, Search } from "lucide-react";
 
-export function MainContent() {
+interface MainContentProps {
+  onShowToast: (toast: { type: "success" | "error" | "info"; title: string; message: string }) => void;
+}
+
+const tabs = ["Online", "Todos", "Pendente", "Bloqueado"];
+
+export function MainContent({ onShowToast }: MainContentProps) {
+  const [activeTab, setActiveTab] = useState("Online");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    onShowToast({
+      type: "info",
+      title: `Aba alterada`,
+      message: `Visualizando amigos: ${tab}`
+    });
+  };
+
+  const handlePhoneCall = () => {
+    onShowToast({
+      type: "success",
+      title: "Iniciando chamada",
+      message: "Conectando chamada de voz..."
+    });
+  };
+
+  const handleVideoCall = () => {
+    onShowToast({
+      type: "success",
+      title: "Iniciando videochamada",
+      message: "Conectando chamada de vídeo..."
+    });
+  };
+
+  const handleAddFriend = () => {
+    onShowToast({
+      type: "info",
+      title: "Adicionar amigo",
+      message: "Abrindo formulário para adicionar novo amigo"
+    });
+  };
+
+  const friends = [
+    { name: "Teste", status: "Há algumas horas", avatar: "T" },
+  ];
+
+  const filteredFriends = friends.filter(friend =>
+    friend.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <div className="flex-1 bg-discord-dark flex flex-col">
       {/* Header */}
@@ -10,13 +60,25 @@ export function MainContent() {
           <span className="text-white font-semibold">Amigos</span>
         </div>
         <div className="flex items-center space-x-4">
-          <button className="text-discord-text-muted hover:text-white p-1 rounded">
+          <button
+            onClick={handlePhoneCall}
+            className="text-discord-text-muted hover:text-white p-1 rounded transition-colors"
+            title="Iniciar chamada de voz"
+          >
             <Phone size={20} />
           </button>
-          <button className="text-discord-text-muted hover:text-white p-1 rounded">
+          <button
+            onClick={handleVideoCall}
+            className="text-discord-text-muted hover:text-white p-1 rounded transition-colors"
+            title="Iniciar videochamada"
+          >
             <Video size={20} />
           </button>
-          <button className="text-discord-text-muted hover:text-white p-1 rounded">
+          <button
+            onClick={handleAddFriend}
+            className="text-discord-text-muted hover:text-white p-1 rounded transition-colors"
+            title="Adicionar amigo"
+          >
             <UserPlus size={20} />
           </button>
           <div className="relative">
@@ -27,6 +89,8 @@ export function MainContent() {
             <input
               type="text"
               placeholder="Buscar"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="bg-discord-darkest text-discord-text-primary placeholder-discord-text-muted rounded pl-10 pr-4 py-1 text-sm focus:outline-none w-36"
             />
           </div>
@@ -36,19 +100,23 @@ export function MainContent() {
       {/* Tabs */}
       <div className="px-4 py-2 border-b border-discord-hover">
         <div className="flex space-x-6">
-          <button className="text-discord-text-primary font-medium pb-2 border-b-2 border-discord-blurple">
-            Online
-          </button>
-          <button className="text-discord-text-muted hover:text-discord-text-primary pb-2">
-            Todos
-          </button>
-          <button className="text-discord-text-muted hover:text-discord-text-primary pb-2">
-            Pendente
-          </button>
-          <button className="text-discord-text-muted hover:text-discord-text-primary pb-2">
-            Bloqueado
-          </button>
-          <button className="bg-discord-green text-white px-4 py-1 rounded text-sm font-medium ml-auto">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => handleTabChange(tab)}
+              className={`pb-2 transition-colors ${
+                activeTab === tab
+                  ? "text-discord-text-primary font-medium border-b-2 border-discord-blurple"
+                  : "text-discord-text-muted hover:text-discord-text-primary"
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+          <button
+            onClick={handleAddFriend}
+            className="bg-discord-green text-white px-4 py-1 rounded text-sm font-medium ml-auto hover:bg-discord-green/90 transition-colors"
+          >
             Adicionar amigo
           </button>
         </div>
@@ -59,13 +127,21 @@ export function MainContent() {
         {/* Friends List */}
         <div className="flex-1 p-4">
           <h2 className="text-discord-text-primary text-lg font-semibold mb-4">
-            ONLINE - 1
+            {activeTab.toUpperCase()} - {filteredFriends.length}
           </h2>
 
-          <div className="space-y-1">
-            {[
-              { name: "Teste", status: "Há algumas horas", avatar: "T" },
-            ].map((friend, index) => (
+          {filteredFriends.length === 0 ? (
+            <div className="text-center py-8">
+              <div className="text-discord-text-secondary mb-2">
+                {searchTerm ? "Nenhum amigo encontrado" : `Nenhum amigo ${activeTab.toLowerCase()}`}
+              </div>
+              <div className="text-discord-text-muted text-sm">
+                {searchTerm ? "Tente buscar com outros termos" : "Que tal adicionar alguns amigos?"}
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-1">
+              {filteredFriends.map((friend, index) => (
               <div
                 key={index}
                 className="flex items-center p-2 rounded hover:bg-discord-hover cursor-pointer group"
@@ -96,8 +172,9 @@ export function MainContent() {
                   </button>
                 </div>
               </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Active Now Sidebar */}
