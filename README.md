@@ -4,6 +4,8 @@ Um template de aplicação full-stack React pronta para produção com servidor 
 
 Embora o starter venha com um servidor express, crie endpoints apenas quando estritamente necessário, por exemplo, para encapsular lógica que deve permanecer no servidor, como manipulação de chaves privadas ou certas operações de banco de dados, etc.
 
+<img width="1444" height="810" alt="Novo Projeto" src="https://github.com/user-attachments/assets/3140a684-ec31-4486-b055-e8c426019022" />
+
 ## Stack de Tecnologias
 
 - **PNPM**: Prefira pnpm
